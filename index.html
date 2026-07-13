@@ -412,6 +412,33 @@ const REGION_COUNTRY = {
   "全球通用": "不限地区",
 };
 
+// 纯城市英文名，用于标签展示（不带国家后缀，方便顺便学英文）
+const REGION_EN_DISPLAY = {
+  "东京": "Tokyo", "京都": "Kyoto", "日本": "Japan",
+  "曼谷": "Bangkok", "泰国": "Thailand",
+  "首尔": "Seoul", "韩国": "South Korea",
+  "巴厘岛": "Bali",
+  "台北": "Taipei",
+  "中国": "China",
+  "新加坡": "Singapore",
+  "越南": "Vietnam",
+  "巴黎": "Paris", "法国": "France",
+  "罗马": "Rome",
+  "巴塞罗那": "Barcelona", "西班牙": "Spain",
+  "伦敦": "London",
+  "阿姆斯特丹": "Amsterdam",
+  "伊斯坦布尔": "Istanbul",
+  "布拉格": "Prague",
+  "匈牙利": "Hungary",
+  "欧洲": "Europe",
+  "纽约": "New York",
+  "墨西哥城": "Mexico City",
+  "马拉喀什": "Marrakech",
+  "开普敦": "Cape Town",
+  "墨尔本": "Melbourne", "悉尼NSW": "Sydney", "塔洲": "Tasmania",
+  "大洋洲多国": "Pacific Islands",
+};
+
 const REGION_ENGLISH = {
   "东京": "Tokyo Japan", "京都": "Kyoto Japan", "日本": "Japan",
   "曼谷": "Bangkok Thailand", "泰国": "Thailand",
@@ -1479,6 +1506,7 @@ function renderCard(place) {
   const isCheckedIn = state.checkedIn.has(place.id);
   const isLong = place.content.length > 140;
   const country = REGION_COUNTRY[place.region];
+  const regionEn = REGION_EN_DISPLAY[place.region];
 
   const card = document.createElement("div");
   card.className = "card";
@@ -1490,7 +1518,7 @@ function renderCard(place) {
       <h2>${place.title}</h2>
     </div>
     <div class="card-tags">
-      <span class="tag region">📍 ${place.region}${country ? " · " + country : ""}</span>
+      <span class="tag region">📍 ${place.region}${regionEn ? " " + regionEn : ""}${country ? " · " + country : ""}</span>
       ${typeTags}
       ${isCheckedIn ? '<span class="tag checked-in-badge">✓ 已打卡</span>' : ""}
       ${place.isResource ? '<span class="tag resource">🧰 资源</span>' : ""}
